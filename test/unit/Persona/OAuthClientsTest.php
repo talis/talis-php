@@ -54,7 +54,7 @@ class OAuthClientsTest extends TestBase
         $this->setExpectedException(Exception::class, 'Did not retrieve successful response code');
         /** @var MockObject&OAuthClients */
         $mockClient = $this->getMockBuilder(OAuthClients::class)
-            ->setMethods(['personaGetOAuthClient'])
+            ->onlyMethods(['personaGetOAuthClient'])
             ->setConstructorArgs([
                 [
                     'userAgent' => 'unittest',
@@ -74,7 +74,7 @@ class OAuthClientsTest extends TestBase
     {
         /** @var MockObject&OAuthClients */
         $mockClient = $this->getMockBuilder(OAuthClients::class)
-            ->setMethods(['personaGetOAuthClient'])
+            ->onlyMethods(['personaGetOAuthClient'])
             ->setConstructorArgs([
             [
                 'userAgent' => 'unittest',
@@ -249,7 +249,7 @@ class OAuthClientsTest extends TestBase
         $this->setExpectedException(Exception::class, 'Could not retrieve OAuth response code');
         /** @var MockObject&OAuthClients */
         $mockClient = $this->getMockBuilder(OAuthClients::class)
-            ->setMethods(['personaPatchOAuthClient'])
+            ->onlyMethods(['personaPatchOAuthClient'])
             ->setConstructorArgs([
                 [
                     'userAgent' => 'unittest',
@@ -269,7 +269,7 @@ class OAuthClientsTest extends TestBase
     {
         /** @var MockObject&OAuthClients */
         $mockClient = $this->getMockBuilder(OAuthClients::class)
-            ->setMethods(['personaPatchOAuthClient'])
+            ->onlyMethods(['personaPatchOAuthClient'])
             ->setConstructorArgs([
                 [
                     'userAgent' => 'unittest',
@@ -298,7 +298,7 @@ class OAuthClientsTest extends TestBase
     {
         /** @var MockObject&OAuthClients */
         $oauthClient = $this->getMockBuilder(OAuthClients::class)
-            ->setMethods(['performRequest'])
+            ->onlyMethods(['performRequest'])
             ->setConstructorArgs([
                 [
                     'userAgent' => 'unittest',
@@ -336,7 +336,7 @@ class OAuthClientsTest extends TestBase
     {
         /** @var MockObject&OAuthClients */
         $oauthClient = $this->getMockBuilder(OAuthClients::class)
-            ->setMethods(['performRequest'])
+            ->onlyMethods(['performRequest'])
             ->setConstructorArgs([
                 [
                     'userAgent' => 'unittest',
@@ -372,7 +372,7 @@ class OAuthClientsTest extends TestBase
     {
         /** @var MockObject&OAuthClients */
         $oauthClient = $this->getMockBuilder(OAuthClients::class)
-            ->setMethods(['performRequest'])
+            ->onlyMethods(['performRequest'])
             ->setConstructorArgs([
                 [
                     'userAgent' => 'unittest',

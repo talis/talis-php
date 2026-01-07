@@ -138,15 +138,15 @@ class Client
             switch ($response->getStatusCode()) {
                 case 400:
                     throw new \Talis\Manifesto\Exceptions\ManifestValidationException(
-                        $error['message'],
-                        $error['error_code'],
+                        $error['message'] ?? '',
+                        $error['error_code'] ?? 400,
                         $exception
                     );
                 case 403:
                 case 401:
                     throw new \Talis\Manifesto\Exceptions\UnauthorisedAccessException(
-                        $error['message'],
-                        $error['error_code'],
+                        $error['message'] ?? '',
+                        $error['error_code'] ?? 401,
                         $exception
                     );
                     break;
@@ -196,8 +196,8 @@ class Client
             switch ($response->getStatusCode()) {
                 case 401:
                     throw new \Talis\Manifesto\Exceptions\UnauthorisedAccessException(
-                        $error['message'],
-                        $error['error_code'],
+                        $error['message'] ?? '',
+                        $error['error_code'] ?? 401,
                         $exception
                     );
                     break;

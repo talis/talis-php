@@ -270,7 +270,7 @@ class ClientTest extends TestBase
         /** @var \Psr\Http\Message\RequestInterface $request */
         $request = array_pop($history)['request'];
         $this->assertEquals($responseBody, $actualBody);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '#^/feeds/targets/[a-f0-9]{32}/activity/annotations$#',
             (string) $request->getUri()
         );
@@ -309,7 +309,7 @@ class ClientTest extends TestBase
         /** @var \Psr\Http\Message\RequestInterface $request */
         $request = array_pop($history)['request'];
         $this->assertEquals($responseBody, $actualBody);
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '#^/feeds/targets/[a-f0-9]{32}/activity/annotations/hydrate\?delta_token=1$#',
             (string) $request->getUri()
         );
@@ -432,7 +432,7 @@ class ClientTest extends TestBase
      * @param array $history History middleware container
      * @return \Talis\Babel\Client|\MockObject The client.
      */
-    private function getClientWithMockResponses(array $responses, array &$history = null)
+    private function getClientWithMockResponses(array $responses, array &$history = [])
     {
         $mockHandler = new \GuzzleHttp\Handler\MockHandler($responses);
         $handlerStack = \GuzzleHttp\HandlerStack::create($mockHandler);
@@ -445,7 +445,7 @@ class ClientTest extends TestBase
 
         /** @var MockObject&\Talis\Babel\Client */
         $babelClient = $this->getMockBuilder(\Talis\Babel\Client::class)
-            ->setMethods(['getHTTPClient'])
+            ->onlyMethods(['getHTTPClient'])
             ->setConstructorArgs(['http://someHost', '3001'])
             ->getMock();
 

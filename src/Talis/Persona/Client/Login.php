@@ -21,7 +21,7 @@ class Login extends Base
         $appId,
         $appSecret,
         $redirectUri = '',
-        array $query = null
+        array $query = []
     ) {
         // Already authenticated
         if ($this->isLoggedIn()) {
@@ -192,7 +192,7 @@ class Login extends Base
      * @param string $redirectUri where to return to once login has completed
      * @param array $query parameters passed in Persona (currently supports require=profile)
      */
-    protected function login($redirectUri = '', array $query = null)
+    protected function login($redirectUri = '', array $query = [])
     {
         // Create a uniq ID for state - prefixed with md5 hash of app ID
         $loginState = $this->getLoginState();
@@ -205,10 +205,6 @@ class Login extends Base
             . '/auth/providers/'
             . $_SESSION[self::LOGIN_PREFIX . ':loginProvider']
             . '/login';
-
-        if (empty($query)) {
-            $query = [];
-        }
 
         if (!empty($redirectUri)) {
             $query['redirectUri'] = $redirectUri;

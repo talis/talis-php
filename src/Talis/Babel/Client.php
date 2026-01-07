@@ -242,7 +242,7 @@ class Client implements LoggerAwareInterface
             );
         }
 
-        $requestOptions = null;
+        $requestOptions = [];
         if ($bCreateSynchronously) {
             // Specific header that Babel server accepts to not return until the
             // feed has also been created for the annotation.
@@ -328,17 +328,13 @@ class Client implements LoggerAwareInterface
      * @param string $url babel http url
      * @param string $token persona oauth token
      * @param array $arrData http post parameters
-     * @param array|null $requestOptions Additional request options to use.
+     * @param array $requestOptions Additional request options to use.
      * @return mixed
      * @throws InvalidPersonaTokenException Invalid Persona token
      * @throws \Talis\Babel\ClientException Babel communication errors
      */
-    protected function performBabelPost($url, $token, array $arrData, array $requestOptions = null)
+    protected function performBabelPost($url, $token, array $arrData, array $requestOptions = [])
     {
-        if (empty($requestOptions)) {
-            $requestOptions = [];
-        }
-
         $headers = [
             'Accept' => 'application/json',
             'Authorization' => "Bearer $token",

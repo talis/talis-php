@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ALL);
+
 if (!defined('APPROOT')) {
     define('APPROOT', dirname(__DIR__));
 }
@@ -17,6 +19,3 @@ function envvalue($name, $default)
     $value = getenv($name);
     return $value == false ? $default : $value;
 }
-
-// For PHPUnit 4+ compatibility
-require 'compat.php';

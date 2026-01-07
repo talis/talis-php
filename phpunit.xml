@@ -4,7 +4,11 @@
     backupGlobals="true"
     beStrictAboutTestsThatDoNotTestAnything="false"
     colors="true"
-    failOnWarning="false"
+    convertDeprecationsToExceptions="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    failOnWarning="true"
 >
     <coverage includeUncoveredFiles="true">
         <include>

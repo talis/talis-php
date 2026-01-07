@@ -121,8 +121,8 @@ class Client
                 case 403:
                 case 401:
                     throw new \Talis\Critic\Exceptions\UnauthorisedAccessException(
-                        $error['message'],
-                        $error['error_code'],
+                        $error['message'] ?? '',
+                        $error['error_code'] ?? $response->getStatusCode(),
                         $exception
                     );
                     break;

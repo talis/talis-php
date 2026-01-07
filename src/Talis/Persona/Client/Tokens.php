@@ -75,7 +75,7 @@ class Tokens extends Base
      * @throws CommunicationException Cannot communicate with Persona
      * @throws \Exception If not able to communicate with Persona to retrieve the public certificate
      */
-    protected function validateTokenUsingJWT($token, array $scopes = null)
+    protected function validateTokenUsingJWT($token, array $scopes = [])
     {
         $publicCert = $this->retrieveJWTCertificate();
 

@@ -222,7 +222,7 @@ abstract class Base implements LoggerAwareInterface
             }
 
             throw new \Exception(
-                "Did not retrieve successful response code from persona: ${status}",
+                "Did not retrieve successful response code from persona: {$status}",
                 $status
             );
         }

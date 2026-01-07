@@ -60,7 +60,7 @@ class Event implements \JsonSerializable
      * Get the event data in a json serialization format
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         $event = [
             'class' => $this->class,
