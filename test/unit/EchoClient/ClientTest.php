@@ -435,7 +435,7 @@ class ClientTest extends TestBase
 
         /** @var MockObject&\Talis\EchoClient\Client */
         $echoClient = $this->getMockBuilder(\Talis\EchoClient\Client::class)
-            ->setMethods(['getAnalytics'])
+            ->onlyMethods(['getAnalytics'])
             ->getMock();
         $echoClient->expects($this->once())->method('getAnalytics')->with('some.class', $expectedType);
 
@@ -494,7 +494,7 @@ class ClientTest extends TestBase
 
         /** @var MockObject&\Talis\EchoClient\Client */
         $echoClient = $this->getMockBuilder(\Talis\EchoClient\Client::class)
-            ->setMethods(['getHTTPClient', 'getPersonaClient'])
+            ->onlyMethods(['getHTTPClient', 'getPersonaClient'])
             ->getMock();
 
         $echoClient->method('getHTTPClient')

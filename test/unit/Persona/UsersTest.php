@@ -556,7 +556,7 @@ class UsersTest extends TestBase
     {
         /** @var MockObject&\Talis\Persona\Client\Users */
         $mockClient = $this->getMockBuilder(\Talis\Persona\Client\Users::class)
-            ->setMethods($methods)
+            ->onlyMethods($methods)
             ->setConstructorArgs($arguments)
             ->getMock();
 

@@ -17,6 +17,3 @@ function envvalue($name, $default)
     $value = getenv($name);
     return $value == false ? $default : $value;
 }
-
-// For PHPUnit 4+ compatibility
-require 'compat.php';

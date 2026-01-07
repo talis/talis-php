@@ -67,7 +67,7 @@ class LoginTest extends TestBase
     {
         /** @var MockObject&\Talis\Persona\Client\Login */
         $mockClient = $this->getMockBuilder(\Talis\Persona\Client\Login::class)
-            ->setMethods(['login'])
+            ->onlyMethods(['login'])
             ->setConstructorArgs([
                 [
                     'userAgent' => 'unittest',
@@ -104,7 +104,7 @@ class LoginTest extends TestBase
     {
         /** @var MockObject&\Talis\Persona\Client\Login */
         $mockClient = $this->getMockBuilder(\Talis\Persona\Client\Login::class)
-            ->setMethods(['login'])
+            ->onlyMethods(['login'])
             ->setConstructorArgs([
             [
                 'userAgent' => 'unittest',
@@ -128,7 +128,7 @@ class LoginTest extends TestBase
     {
         /** @var MockObject&\Talis\Persona\Client\Login */
         $mockClient = $this->getMockBuilder(\Talis\Persona\Client\Login::class)
-            ->setMethods(['isLoggedIn', 'login'])
+            ->onlyMethods(['isLoggedIn', 'login'])
             ->setConstructorArgs([
             [
                 'userAgent' => 'unittest',
@@ -151,7 +151,7 @@ class LoginTest extends TestBase
     {
         /** @var MockObject&\Talis\Persona\Client\Login */
         $mockClient = $this->getMockBuilder(\Talis\Persona\Client\Login::class)
-            ->setMethods(['isLoggedIn', 'login'])
+            ->onlyMethods(['isLoggedIn', 'login'])
             ->setConstructorArgs([
             [
                 'userAgent' => 'unittest',
@@ -385,7 +385,7 @@ class LoginTest extends TestBase
     {
         /** @var MockObject&\Talis\Persona\Client\Login */
         $mockClient = $this->getMockBuilder(\Talis\Persona\Client\Login::class)
-            ->setMethods(['isLoggedIn'])
+            ->onlyMethods(['isLoggedIn'])
             ->setConstructorArgs([
             [
                 'userAgent' => 'unittest',
@@ -432,7 +432,7 @@ class LoginTest extends TestBase
     {
         /** @var MockObject&\Talis\Persona\Client\Login */
         $mockClient = $this->getMockBuilder(\Talis\Persona\Client\Login::class)
-            ->setMethods(['isLoggedIn', 'login'])
+            ->onlyMethods(['isLoggedIn', 'login'])
             ->setConstructorArgs([
             [
                 'userAgent' => 'unittest',
@@ -614,7 +614,7 @@ class LoginTest extends TestBase
 
         /** @var MockObject&\Talis\Persona\Client\Login */
         $client = $this->getMockBuilder(\Talis\Persona\Client\Login::class)
-            ->setMethods(['redirect', 'getLoginState'])
+            ->onlyMethods(['redirect', 'getLoginState'])
             ->setConstructorArgs($arguments)
             ->getMock();
 

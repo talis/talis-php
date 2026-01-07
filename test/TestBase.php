@@ -9,23 +9,19 @@ abstract class TestBase extends TestCase
     /**
      * Backward-compatible way of setting exception expectations.
      *
-     * @param mixed  $exceptionName
+     * @param string $exceptionName
      * @param string $exceptionMessage
-     * @param int    $exceptionCode
+     * @param int|null $exceptionCode
      * @return void
      */
-    public function setExpectedException($exceptionName, $exceptionMessage = '', $exceptionCode = null)
+    public function setExpectedException(string $exceptionName, string $exceptionMessage = '', $exceptionCode = null)
     {
-        if (method_exists($this, 'expectException')) {
-            $this->expectException($exceptionName);
-            if ($exceptionMessage !== '') {
-                $this->expectExceptionMessage($exceptionMessage);
-            }
-            if ($exceptionCode !== null) {
-                $this->expectExceptionCode($exceptionCode);
-            }
-        } else {
-            parent::setExpectedException($exceptionName, $exceptionMessage, $exceptionCode);
+        $this->expectException($exceptionName);
+        if ($exceptionMessage !== '') {
+            $this->expectExceptionMessage($exceptionMessage);
+        }
+        if ($exceptionCode !== null) {
+            $this->expectExceptionCode($exceptionCode);
         }
     }
 

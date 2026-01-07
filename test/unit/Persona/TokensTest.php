@@ -140,7 +140,6 @@ class TokensTest extends TestBase
     {
         $mockClient = $this->getMockTokensClient(
             [
-                'getCacheClient',
                 'personaObtainNewToken',
                 'cacheToken',
                 'retrieveJWTCertificate',
@@ -189,7 +188,6 @@ class TokensTest extends TestBase
     {
         $mockClient = $this->getMockTokensClient(
             [
-                'getCacheClient',
                 'personaObtainNewToken',
                 'retrieveJWTCertificate',
                 'cacheToken',
@@ -1004,7 +1002,7 @@ class TokensTest extends TestBase
         /** @var MockObject&FilesystemCache */
         $cacheBackend = $this->getMockBuilder(FilesystemCache::class)
             ->disableOriginalConstructor()
-            ->setMethods(['doFetch'])
+            ->onlyMethods(['doFetch'])
             ->getMock();
 
         $cacheBackend->expects($this->atLeastOnce())
@@ -1040,7 +1038,7 @@ class TokensTest extends TestBase
         /** @var MockObject&FilesystemCache */
         $cacheBackend = $this->getMockBuilder(FilesystemCache::class)
             ->disableOriginalConstructor()
-            ->setMethods(['doFetch', 'doSave'])
+            ->onlyMethods(['doFetch', 'doSave'])
             ->getMock();
 
         $cacheBackend->expects($this->atLeastOnce())
@@ -1080,7 +1078,7 @@ class TokensTest extends TestBase
         /** @var MockObject&FilesystemCache */
         $cacheBackend = $this->getMockBuilder(FilesystemCache::class)
             ->disableOriginalConstructor()
-            ->setMethods(['doFetch'])
+            ->onlyMethods(['doFetch'])
             ->getMock();
 
         $cacheBackend->expects($this->atLeastOnce())
@@ -1110,7 +1108,7 @@ class TokensTest extends TestBase
         /** @var MockObject&FilesystemCache */
         $cacheBackend = $this->getMockBuilder(FilesystemCache::class)
             ->disableOriginalConstructor()
-            ->setMethods(['doSave', 'doFetch'])
+            ->onlyMethods(['doSave', 'doFetch'])
             ->getMock();
 
         $cacheBackend->expects($this->atLeastOnce())
@@ -1144,7 +1142,7 @@ class TokensTest extends TestBase
         /** @var MockObject&FilesystemCache */
         $cacheBackend = $this->getMockBuilder(FilesystemCache::class)
             ->disableOriginalConstructor()
-            ->setMethods(['doFetch', 'doSave'])
+            ->onlyMethods(['doFetch', 'doSave'])
             ->getMock();
 
         $cacheBackend->expects($this->atLeastOnce())
@@ -1189,7 +1187,7 @@ class TokensTest extends TestBase
         /** @var MockObject&FilesystemCache */
         $cacheBackend = $this->getMockBuilder(FilesystemCache::class)
             ->disableOriginalConstructor()
-            ->setMethods(['doFetch', 'doSave'])
+            ->onlyMethods(['doFetch', 'doSave'])
             ->getMock();
 
         $cacheBackend->expects($this->exactly(3))
@@ -1240,7 +1238,7 @@ class TokensTest extends TestBase
         /** @var MockObject&FilesystemCache */
         $cacheBackend = $this->getMockBuilder(FilesystemCache::class)
             ->disableOriginalConstructor()
-            ->setMethods(['doFetch', 'doSave'])
+            ->onlyMethods(['doFetch', 'doSave'])
             ->getMock();
 
         $cacheBackend->expects($this->atLeastOnce())
@@ -1361,7 +1359,7 @@ class TokensTest extends TestBase
     {
         /** @var MockObject&\Talis\Persona\Client\Tokens */
         $mockClient = $this->getMockBuilder(\Talis\Persona\Client\Tokens::class)
-            ->setMethods($methods)
+            ->onlyMethods($methods)
             ->setConstructorArgs($arguments)
             ->getMock();
 

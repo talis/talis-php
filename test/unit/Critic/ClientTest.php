@@ -121,14 +121,14 @@ class ClientTest extends TestBase
         /** @var MockObject&\Talis\Persona\Client\Tokens */
         $tokenClient = $this->getMockBuilder(\Talis\Persona\Client\Tokens::class)
             ->disableOriginalConstructor()
-            ->setMethods(['obtainNewToken'])
+            ->onlyMethods(['obtainNewToken'])
             ->getMock();
         $tokenClient->method('obtainNewToken')
             ->willReturn(['access_token' => 'TOKEN']);
 
         /** @var MockObject&\Talis\Critic\Client */
         $criticClient = $this->getMockBuilder(\Talis\Critic\Client::class)
-            ->setMethods(['getHTTPClient', 'getTokenClient'])
+            ->onlyMethods(['getHTTPClient', 'getTokenClient'])
             ->setConstructorArgs([$this->criticBaseUrl])
             ->getMock();
 

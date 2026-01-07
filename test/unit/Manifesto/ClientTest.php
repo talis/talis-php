@@ -223,7 +223,7 @@ class ClientTest extends TestBase
         /** @var MockObject&\Talis\Manifesto\Client */
         $manifestoClient = $this->getMockBuilder(\Talis\Manifesto\Client::class)
             ->setConstructorArgs([$manifestoBaseUrl, $personaConnectValues])
-            ->setMethods(['getHTTPClient', 'getPersonaClient'])
+            ->onlyMethods(['getHTTPClient', 'getPersonaClient'])
             ->getMock();
 
         $manifestoClient->method('getHTTPClient')
