@@ -43,21 +43,11 @@ abstract class TestBase extends TestCase
     }
 
     /**
-     * @before
-     */
-    protected function printName()
-    {
-        $className = get_class($this);
-        $testName = $this->getName();
-        echo " Test: {$className}->{$testName}\n";
-    }
-
-    /**
      * @param string $version Override this to a specific version (defaults to the latest).
      * @return string The versioned persona host used in the test environment.
      */
     protected function versionedPersonaHost($version = \Talis\Persona\Client\Base::PERSONA_API_VERSION)
     {
-        return "localhost/${version}";
+        return "localhost/{$version}";
     }
 }
