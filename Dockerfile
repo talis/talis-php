@@ -1,22 +1,16 @@
-FROM ubuntu:trusty
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV COMPOSER_HOME=/tmp
-
-# Install php and ant
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-        curl ca-certificates \
-        php5-cli \
-        php5-dev \
-        php5-xdebug \
-        php5-curl \
-        php5-json \
-        php-pear \
-        git \
-        unzip \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+FROM php:7.3.33-cli
 
 WORKDIR /var/talis-php
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  ca-certificates \
+  curl \
+  git \
+  unzip \
+  zip \
+  && rm -rf /var/lib/apt/lists/*
+
+COPY --from=mlocati/php-extension-installer:2.9.30 /usr/bin/install-php-extensions /usr/local/bin/
+COPY --from=composer:2.9.5 /usr/bin/composer /usr/local/bin/
+
+RUN install-php-extensions xdebug
