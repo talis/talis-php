@@ -1,13 +1,15 @@
+x-common-env: &common-env
+  PERSONA_TEST_HOST: ${PERSONA_TEST_HOST:-http://persona.talis.local}
+  PERSONA_TEST_OAUTH_CLIENT: ${PERSONA_TEST_OAUTH_CLIENT:-primate}
+  PERSONA_TEST_OAUTH_SECRET: ${PERSONA_TEST_OAUTH_SECRET:-bananas}
+
 x-common-values: &common-values
   image: talis/talis-php
   network_mode: host
   build:
     context: .
     network: host
-  environment:
-    PERSONA_TEST_HOST: ${PERSONA_TEST_HOST:-http://persona.talis.local}
-    PERSONA_TEST_OAUTH_CLIENT: ${PERSONA_TEST_OAUTH_CLIENT:-primate}
-    PERSONA_TEST_OAUTH_SECRET: ${PERSONA_TEST_OAUTH_SECRET:-bananas}
+  environment: *common-env
   volumes:
     - ".:/var/talis-php"
 
@@ -42,6 +44,9 @@ services:
 
   coverage:
     <<: *common-values
+    environment:
+      <<: *common-env
+      XDEBUG_MODE: coverage
     command: "composer coverage"
 
   analyse:
