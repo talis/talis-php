@@ -1,5 +1,3 @@
-version: "3.7"
-
 x-common-values: &common-values
   image: talis/talis-php
   network_mode: host
@@ -16,27 +14,27 @@ x-common-values: &common-values
 services:
   init:
     <<: *common-values
-    command: "bash -c 'test -f composer.phar || (curl -sS https://getcomposer.org/installer | php); php composer.phar install'"
+    command: "composer install"
 
   lint:
     <<: *common-values
-    command: "php composer.phar lint"
+    command: "composer lint"
 
   code-check:
     <<: *common-values
-    command: "php composer.phar code-check"
+    command: "composer code-check"
 
   test:
     <<: *common-values
-    command: "php composer.phar test"
+    command: "composer test"
 
   unittest:
     <<: *common-values
-    command: "php composer.phar unittest"
+    command: "composer unittest"
 
   integrationtest:
     <<: *common-values
-    command: "php composer.phar integrationtest"
+    command: "composer integrationtest"
 
   local-dev:
     <<: *common-values
@@ -44,7 +42,7 @@ services:
 
   coverage:
     <<: *common-values
-    command: "php composer.phar coverage"
+    command: "composer coverage"
 
   analyse:
     image: phpstan/phpstan:0.12.40
