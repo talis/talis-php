@@ -2,6 +2,8 @@
 
 namespace Talis\Babel;
 
+use GuzzleHttp\HandlerStack;
+use GuzzleRetry\GuzzleRetryMiddleware;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerAwareInterface;
@@ -415,7 +417,19 @@ class Client implements LoggerAwareInterface
                 $baseUrl .= ":$port";
             }
 
-            $this->httpClient = new \GuzzleHttp\Client(['base_uri' => $baseUrl]);
+            // Using the default values of https://github.com/caseyamcl/guzzle_retry_middleware.
+            // Will trap 429 & 503 errors and retry (honouring `RetryAfter` header for 429's).
+            $stack = HandlerStack::create();
+            $stack->push(GuzzleRetryMiddleware::factory([
+                'on_retry_callback' => function ($attemptNumber, $delay) {
+                    $this->getLogger()->warning("Babel retry #{$attemptNumber} after {$delay}s delay");
+                }
+            ]));
+
+            $this->httpClient = new \GuzzleHttp\Client([
+                'base_uri' => $baseUrl,
+                'handler' => $stack
+            ]);
         }
 
         return $this->httpClient;

@@ -26,6 +26,7 @@
     "php": ">=7.3",
     "ext-hash": "*",
     "ext-openssl": "*",
+    "caseyamcl/guzzle_retry_middleware": "^2.13",
     "doctrine/common": "^2.5",
     "firebase/php-jwt": "^6.2 || ^7.0",
     "guzzlehttp/guzzle": "^6.5.8 || ^7.4.5",
