@@ -2,6 +2,9 @@
 
 namespace Talis\Manifesto;
 
+use GuzzleHttp\HandlerStack;
+use GuzzleRetry\GuzzleRetryMiddleware;
+
 // phpcs:disable PSR1.Files.SideEffects
 require_once 'common.inc.php';
 
@@ -92,7 +95,14 @@ class Client
     protected function getHTTPClient()
     {
         if (!$this->httpClient) {
-            $this->httpClient = new \GuzzleHttp\Client();
+            // Using the default values of https://github.com/caseyamcl/guzzle_retry_middleware.
+            // Will trap 429 & 503 errors and retry (honouring `RetryAfter` header for 429's).
+            $stack = HandlerStack::create();
+            $stack->push(GuzzleRetryMiddleware::factory());
+
+            $this->httpClient = new \GuzzleHttp\Client([
+                'handler' => $stack
+            ]);
         }
         return $this->httpClient;
     }

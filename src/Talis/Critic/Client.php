@@ -2,6 +2,9 @@
 
 namespace Talis\Critic;
 
+use GuzzleHttp\HandlerStack;
+use GuzzleRetry\GuzzleRetryMiddleware;
+
 class Client
 {
     protected $clientId;
@@ -77,7 +80,14 @@ class Client
     protected function getHTTPClient()
     {
         if (!$this->httpClient) {
-            $this->httpClient = new \GuzzleHttp\Client();
+            // Using the default values of https://github.com/caseyamcl/guzzle_retry_middleware.
+            // Will trap 429 & 503 errors and retry (honouring `RetryAfter` header for 429's).
+            $stack = HandlerStack::create();
+            $stack->push(GuzzleRetryMiddleware::factory());
+
+            $this->httpClient = new \GuzzleHttp\Client([
+                'handler' => $stack
+            ]);
         }
 
         return $this->httpClient;

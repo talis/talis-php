@@ -2,6 +2,8 @@
 
 namespace Talis\EchoClient;
 
+use GuzzleHttp\HandlerStack;
+use GuzzleRetry\GuzzleRetryMiddleware;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
@@ -81,7 +83,18 @@ abstract class Base
      */
     protected function getHttpClient()
     {
-        return new \GuzzleHttp\Client();
+        // Using the default values of https://github.com/caseyamcl/guzzle_retry_middleware.
+        // Will trap 429 & 503 errors and retry (honouring `RetryAfter` header for 429's).
+        $stack = HandlerStack::create();
+        $stack->push(GuzzleRetryMiddleware::factory([
+            'on_retry_callback' => function ($attemptNumber, $delay) {
+                $this->getLogger()->warning("Echo retry #{$attemptNumber} after {$delay}s delay");
+            }
+        ]));
+
+        return new \GuzzleHttp\Client([
+            'handler' => $stack
+        ]);
     }
 
     /**

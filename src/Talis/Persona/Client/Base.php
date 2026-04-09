@@ -2,6 +2,8 @@
 
 namespace Talis\Persona\Client;
 
+use GuzzleHttp\HandlerStack;
+use GuzzleRetry\GuzzleRetryMiddleware;
 use Monolog\Logger;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -133,7 +135,19 @@ abstract class Base implements LoggerAwareInterface
      */
     protected function getHTTPClient($host)
     {
-        return new \GuzzleHttp\Client(['base_uri' => $host]);
+        // Using the default values of https://github.com/caseyamcl/guzzle_retry_middleware.
+        // Will trap 429 & 503 errors and retry (honouring `RetryAfter` header for 429's).
+        $stack = HandlerStack::create();
+        $stack->push(GuzzleRetryMiddleware::factory([
+            'on_retry_callback' => function ($attemptNumber, $delay) {
+                $this->getLogger()->warning("Persona retry #{$attemptNumber} after {$delay}s delay");
+            }
+        ]));
+
+        return new \GuzzleHttp\Client([
+            'base_uri' => $host,
+            'handler' => $stack
+        ]);
     }
 
     /**
