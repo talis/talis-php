@@ -50,7 +50,7 @@ services:
     command: "composer coverage"
 
   analyse:
-    image: phpstan/phpstan:0.12.40
+    image: phpstan/phpstan:0.12.89
     volumes:
       - ".:/var/talis-php"
     working_dir: /var/talis-php
