@@ -1,4 +1,4 @@
-FROM php:7.3.33-cli
+FROM php:8.5.12-cli
 
 WORKDIR /var/talis-php
 
